@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cajitas Navideñas | Regalos con Encanto y Calidez</title>
+  <!-- Hoja de estilos con paleta cálida navideña -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- =====================================================================
+       1. ENCABEZADO FIJO DE ESCRITORIO CON CINTA NAVIDEÑA
+       ===================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Logo -->
+      <a href="#inicio" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+            <rect x="2" y="7" width="20" height="5"></rect>
+            <line x1="12" y1="22" x2="12" y2="7"></line>
+            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-title">Cajitas Navideñas</span>
+          <span class="brand-subtitle">✨ Detalles hechos con amor</span>
+        </div>
+      </a>
+
+      <!-- Navegación -->
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#modelos">Modelos</a>
+        <a href="#personalizar">Personalizar</a>
+        <a href="#opciones-extra">Opciones extra</a>
+      </nav>
+
+      <!-- Controles de Sesión y Carrito -->
+      <div class="header-actions">
+        <!-- Botón Iniciar Sesión (visible sin sesión) -->
+        <button id="header-login-btn" type="button" class="btn-auth-login" onclick="openAuthModal('login')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta-600)" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Iniciar sesión</span>
+        </button>
+
+        <!-- Menú Desplegable de Usuario (visible con sesión activa) -->
+        <div id="header-user-wrapper" class="user-menu-wrapper hidden">
+          <button type="button" class="user-menu-trigger" onclick="toggleUserDropdown()">
+            <span id="header-user-avatar" class="user-avatar-circle">AM</span>
+            <span id="header-user-firstname">Ana Sofía</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+
+          <div id="user-dropdown" class="user-dropdown hidden">
+            <div class="dropdown-header">
+              <div id="dropdown-fullname" class="dropdown-fullname">Ana Sofía Mendoza</div>
+              <div id="dropdown-email" class="dropdown-email">ana.demo@cajitasnavidenas.com</div>
+            </div>
+
+            <button type="button" class="dropdown-item" onclick="openAccountModal('profile')">
+              <span class="dropdown-item-left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--forest-600)" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Mi perfil</span>
+              </span>
+            </button>
+
+            <button type="button" class="dropdown-item" onclick="openAccountModal('orders')">
+              <span class="dropdown-item-left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="2">
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                  </path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+                <span>Mis pedidos</span>
+              </span>
+              <span id="dropdown-orders-count" class="dropdown-badge">0</span>
+            </button>
+
+            <div class="dropdown-divider"></div>
+
+            <button type="button" class="dropdown-item dropdown-logout" onclick="handleLogout()">
+              <span class="dropdown-item-left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                  <polyline points="16 17 21 12 16 7"></polyline>
+                  <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                <span>Cerrar sesión</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Botón Carrito -->
+        <button type="button" class="btn-cart-header" onclick="toggleCartDrawer(true)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FDE68A" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span>Mi Carrito</span>
+          <span id="header-cart-count" class="cart-count-pill">2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================================================================
+         2. HERO NAVIDEÑO CÁLIDO DE ESCRITORIO
+         =================================================================== -->
+    <section id="inicio" class="hero-section">
+      <div class="container hero-grid">
+        <!-- Izquierda -->
+        <div>
+          <div class="hero-pill">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="12" y1="2" x2="12" y2="22"></line>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+              <line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line>
+            </svg>
+            <span>Colección Navidad &amp; Fin de Año ❄</span>
+          </div>
+
+          <h1 class="hero-title">
+            Regalos navideños en <span>cajitas</span>
+          </h1>
+
+          <p class="hero-description">
+            Elige un modelo, personalízalo y recíbelo a tiempo. Sorprende a tu equipo, familia o personas especiales con
+            detalles llenos de calidez y espíritu festivo.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#modelos" class="btn-primary">
+              <span>Ver cajitas navideñas</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <line x1="7" y1="7" x2="17" y2="17"></line>
+                <polyline points="17 7 17 17 7 17"></polyline>
+              </svg>
+            </a>
+            <a href="#personalizar" class="btn-secondary">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--gold-400)" stroke-width="2">
+                <path d="M15 4V2"></path>
+                <path d="M15 16v-2"></path>
+                <path d="M8 9h2"></path>
+                <path d="M20 9h2"></path>
+                <path d="M17.8 11.8L19 13"></path>
+                <path d="M15 9h0"></path>
+                <path d="M17.8 6.2L19 5"></path>
+                <path d="m3 21 9-9"></path>
+                <path d="M12.2 6.2 11 5"></path>
+              </svg>
+              <span>Ir al taller de personalización</span>
+            </a>
+          </div>
+
+          <div class="hero-season-note">
+            <span class="pulse-dot"></span>
+            <span>Pedidos y entregas disponibles durante toda la temporada navideña</span>
+          </div>
+        </div>
+
+        <!-- Derecha: Tarjetas Interactivas de Vista Rápida -->
+        <div class="hero-showcase-card">
+          <div class="showcase-header">
+            <div>
+              <span class="showcase-kicker">✦ Vista rápida</span>
+              <h2 class="showcase-heading">Nuestros 3 tamaños festivos</h2>
+            </div>
+            <span class="showcase-pill">Listas para regalar</span>
+          </div>
+
+          <div class="quick-boxes-grid">
+            <!-- Mini -->
+            <button type="button" class="quick-box-btn" onclick="selectBoxAndScroll('mini')">
+              <div>
+                <div class="quick-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&w=600&q=80"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/1E5638/FFFDF9?text=Caja+Mini';"
+                    alt="Caja Mini con galletas y dulces navideños" />
+                </div>
+                <div class="quick-box-body">
+                  <div class="quick-box-name">Mini</div>
+                  <p class="quick-box-desc">Dulces, galletas y tarjeta</p>
+                </div>
+              </div>
+              <div class="quick-box-footer">
+                <span>$12</span>
+                <span>→</span>
+              </div>
+            </button>
+
+            <!-- Clásica -->
+            <button type="button" class="quick-box-btn featured" onclick="selectBoxAndScroll('clasica')">
+              <span class="quick-badge-fav">⭐ Favorita</span>
+              <div>
+                <div class="quick-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=600&q=80"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/B91C1C/FFFDF9?text=Caja+Clasica';"
+                    alt="Caja Clásica con chocolates, vela y taza navideña" />
+                </div>
+                <div class="quick-box-body">
+                  <div class="quick-box-name">Clásica</div>
+                  <p class="quick-box-desc">Chocolates, vela, taza y tarjeta</p>
+                </div>
+              </div>
+              <div class="quick-box-footer">
+                <span>$25</span>
+                <span>→</span>
+              </div>
+            </button>
+
+            <!-- Premium -->
+            <button type="button" class="quick-box-btn premium" onclick="selectBoxAndScroll('premium')">
+              <div>
+                <div class="quick-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/D97706/FFFDF9?text=Caja+Premium';"
+                    alt="Caja Premium gourmet navideña" />
+                </div>
+                <div class="quick-box-body">
+                  <div class="quick-box-name">Premium</div>
+                  <p class="quick-box-desc">Detalle, snacks y bebida</p>
+                </div>
+              </div>
+              <div class="quick-box-footer">
+                <span>$45</span>
+                <span>→</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="showcase-perks">
+            <div class="perk-item"><span>✓</span> Tarjeta incluida</div>
+            <div class="perk-item"><span>✓</span> Opción ecológica</div>
+            <div class="perk-item"><span>✓</span> Envío a domicilio</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         3. CATÁLOGO DE MODELOS Y OPCIONES EXTRA
+         =================================================================== -->
+    <section id="modelos" class="section-block">
+      <div class="container">
+        <div class="section-header-row">
+          <div>
+            <span class="section-kicker">✦ Catálogo de temporada</span>
+            <h2 class="section-title">Modelos de cajitas navideñas</h2>
+            <p class="section-subtitle">
+              Elige tu cajita ideal según a quién quieras sorprender. Todos los modelos se personalizan con dedicatoria
+              cálida y empaque festivo en el siguiente paso.
+            </p>
+          </div>
+          <div class="info-pill-box">
+            <span>Haz clic en <strong style="color: var(--terracotta-600);">Elegir / Personalizar</strong> para
+              configurar tu detalle</span>
+          </div>
+        </div>
+
+        <!-- Cuadrícula de 3 Columnas -->
+        <div id="catalog-grid" class="catalog-grid"></div>
+
+        <!-- Opciones Extra -->
+        <div id="opciones-extra" class="extras-banner">
+          <div>
+            <span class="section-kicker" style="color: var(--gold-500);">Detalles que enamoran</span>
+            <h3 class="serif-title" style="font-size: 1.75rem; color: var(--forest-900); margin-bottom: 10px;">
+              Opciones extra
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--forest-700); line-height: 1.5;">
+              Haz que cada regalo sea inolvidable añadiendo tu mensaje personal, nombre grabado o empaque artesanal
+              ecológico de yute y pino seco.
+            </p>
+          </div>
+
+          <div class="extras-cards-grid">
+            <div class="extra-card">
+              <div class="extra-card-img">
+                <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80"
+                  onerror="this.onerror=null;this.src='https://placehold.co/600x360/FEF3C7/92400E?text=Tarjeta+Personalizada';"
+                  alt="Tarjeta con mensaje personalizado cálido" />
+                <span class="extra-price-pill">Incluida</span>
+              </div>
+              <div class="extra-card-body">
+                <div class="extra-card-title">Tarjeta con dedicatoria</div>
+                <p class="extra-card-text">Mensaje personalizado impreso en papel texturizado cálido con detalles
+                  festivos.</p>
+              </div>
+            </div>
+
+            <div class="extra-card">
+              <div class="extra-card-img">
+                <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=600&q=80"
+                  onerror="this.onerror=null;this.src='https://placehold.co/600x360/FEE2E2/991B1B?text=Etiqueta+Grabada';"
+                  alt="Nombre grabado o etiqueta navideña" />
+                <span class="extra-price-pill">Sin costo</span>
+              </div>
+              <div class="extra-card-body">
+                <div class="extra-card-title">Nombre grabado o etiqueta</div>
+                <p class="extra-card-text">Etiqueta caligráfica con el nombre de tu persona especial o familia.</p>
+              </div>
+            </div>
+
+            <div class="extra-card">
+              <div class="extra-card-img">
+                <img src="https://images.unsplash.com/photo-1576919228236-a097c32a5cd4?auto=format&fit=crop&w=600&q=80"
+                  onerror="this.onerror=null;this.src='https://placehold.co/600x360/DFEFE4/15432B?text=Empaque+Ecologico';"
+                  alt="Empaque ecológico kraft y yute" />
+                <span class="extra-price-pill highlight">+$3.00</span>
+              </div>
+              <div class="extra-card-body">
+                <div class="extra-card-title">Empaque ecológico artesanal</div>
+                <p class="extra-card-text">Caja kraft reciclada, cinta de yute natural y ramitas de pino seco aromático.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         4. PERSONALIZADOR EN VIVO (TALLER NAVIDEÑO)
+         =================================================================== -->
+    <section id="personalizar" class="customizer-section">
+      <div class="container">
+        <div style="margin-bottom: 36px;">
+          <span class="section-kicker" style="color: var(--terracotta-600);">✦ Taller de regalos</span>
+          <h2 class="section-title">Personaliza tu cajita navideña</h2>
+          <p class="section-subtitle">
+            Configura cada detalle y observa cómo lucirá tu regalo en tiempo real antes de añadirlo a tu carrito.
+          </p>
+        </div>
+
+        <div class="customizer-layout">
+          <!-- Columna Izquierda: Vista Previa Dinámica -->
+          <div class="panel-card sticky-preview-card">
+            <div class="preview-top-bar">
+              <span class="preview-live-label">● Vista previa en vivo</span>
+              <span id="preview-pack-badge" class="preview-pack-badge">Empaque Estándar</span>
+            </div>
+
+            <div id="preview-stage" class="preview-stage">
+              <img id="preview-photo"
+                src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=1000&q=85"
+                onerror="this.onerror=null;this.src='https://placehold.co/900x650/1E5638/FFFDF9?text=Cajita+Navidena';"
+                alt="Vista previa de la cajita seleccionada" class="preview-stage-img" />
+              <div class="preview-stage-overlay"></div>
+
+              <div class="preview-stage-header">
+                <div style="max-width: 60%;">
+                  <span id="preview-ideal-text" class="preview-ideal-pill">Ideal para familia y amigos</span>
+                  <h3 id="preview-box-title" class="preview-box-heading">Caja Clásica</h3>
+                  <p id="preview-box-desc" class="preview-box-subdesc">Chocolates, vela, taza y tarjeta</p>
+                </div>
+
+                <!-- Etiqueta con nombre grabado -->
+                <div class="recipient-tag-card">
+                  <div class="recipient-tag-label">
+                    <span>Etiqueta para:</span>
+                  </div>
+                  <span id="preview-recipient-name" class="recipient-tag-value">Tu persona especial</span>
+                </div>
+              </div>
+
+              <!-- Sello visual de Empaque Ecológico -->
+              <div id="preview-eco-ribbon" class="eco-ribbon-badge hidden">
+                <span>🌿 Acabado Empaque Ecológico Kraft &amp; Yute</span>
+              </div>
+
+              <!-- Tarjeta amarilla cálida con mensaje personalizado -->
+              <div class="preview-note-wrapper">
+                <div class="gift-note-card">
+                  <div class="note-card-header">
+                    <span>✦ Dedicatoria Navideña</span>
+                    <span style="color: var(--terracotta-600); font-size: 1rem;">♥</span>
+                  </div>
+                  <p id="preview-card-message" class="note-card-text">
+                    “¡Feliz Navidad! Que esta cajita llene tus días de alegría, paz y momentos dulces.”
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="preview-price-footer">
+              <span>Precio unitario configurado:</span>
+              <div>
+                <span id="preview-unit-price" class="preview-price-amount">$25</span>
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--forest-700);">USD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Formulario de Configuración -->
+          <div class="panel-card">
+            <!-- Paso 1 -->
+            <div class="form-step">
+              <div class="form-step-label">
+                <span>1. Modelo de cajita seleccionado</span>
+              </div>
+              <div class="model-tabs-grid">
+                <button type="button" class="model-tab-btn" data-model="mini" onclick="selectCustomizerModel('mini')">
+                  <div class="model-tab-top">
+                    <span>Mini</span>
+                    <span class="model-tab-price">$12</span>
+                  </div>
+                  <span class="model-tab-sub">Dulces y galletas</span>
+                </button>
+
+                <button type="button" class="model-tab-btn active" data-model="clasica"
+                  onclick="selectCustomizerModel('clasica')">
+                  <div class="model-tab-top">
+                    <span>Clásica</span>
+                    <span class="model-tab-price">$25</span>
+                  </div>
+                  <span class="model-tab-sub">Chocolates, vela, taza</span>
+                </button>
+
+                <button type="button" class="model-tab-btn" data-model="premium"
+                  onclick="selectCustomizerModel('premium')">
+                  <div class="model-tab-top">
+                    <span>Premium</span>
+                    <span class="model-tab-price">$45</span>
+                  </div>
+                  <span class="model-tab-sub">Snacks y bebida</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="form-step">
+              <div class="form-step-label">
+                <label for="input-card-message">2. Mensaje en la tarjeta</label>
+                <span id="char-counter" style="font-size: 0.76rem; font-weight: 600; color: var(--terracotta-600);">0 /
+                  140</span>
+              </div>
+              <textarea id="input-card-message" class="field-textarea" rows="3" maxlength="140"
+                placeholder="Escribe tu mensaje o dedicatoria navideña aquí..."
+                oninput="updateCustomizerPreview()"></textarea>
+              <div class="quick-phrases-row">
+                <button type="button" class="btn-quick-phrase"
+                  onclick="setQuickMessage('¡Feliz Navidad! Gracias por compartir un gran año juntos.')">
+                  + Para equipo / trabajo
+                </button>
+                <button type="button" class="btn-quick-phrase"
+                  onclick="setQuickMessage('Con todo mi cariño en esta Navidad. ¡Te deseo lo mejor hoy y siempre!')">
+                  + Para familia / amigos
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="form-step">
+              <div class="form-step-label">
+                <label for="input-recipient-name">3. Nombre grabado o etiqueta</label>
+              </div>
+              <div class="input-with-icon">
+                <span class="input-icon-left">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                    <path d="M2 2l7.586 7.586"></path>
+                  </svg>
+                </span>
+                <input type="text" id="input-recipient-name" class="field-input" maxlength="35"
+                  placeholder="Ej. María Fernanda, Familia Gómez..." oninput="updateCustomizerPreview()" />
+              </div>
+            </div>
+
+            <!-- Paso 4 -->
+            <div class="form-step">
+              <div class="form-step-label">
+                <span>4. Tipo de empaque</span>
+              </div>
+              <div class="packaging-options-grid">
+                <label id="pack-card-std" class="pack-radio-card selected">
+                  <input type="radio" name="packaging" value="standard" checked onchange="updateCustomizerPreview()" />
+                  <div style="flex: 1;">
+                    <div class="pack-card-header">
+                      <span>Estándar</span>
+                      <span class="pack-price-tag">$0</span>
+                    </div>
+                    <p class="pack-card-desc">Caja festiva con lazo navideño rojo clásico.</p>
+                  </div>
+                </label>
+
+                <label id="pack-card-eco" class="pack-radio-card">
+                  <input type="radio" name="packaging" value="eco" onchange="updateCustomizerPreview()" />
+                  <div style="flex: 1;">
+                    <div class="pack-card-header">
+                      <span>Ecológico 🌿</span>
+                      <span class="pack-price-tag eco">+$3</span>
+                    </div>
+                    <p class="pack-card-desc">Caja kraft artesanal, yute natural y ramitas de pino seco.</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <button type="button" class="btn-add-to-cart" onclick="addConfiguredBoxToCart()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FDE68A" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span>Agregar al carrito</span>
+              <span style="color: var(--gold-200);">•</span>
+              <span id="btn-add-unit-price">$25</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         5. CHECKOUT / DATOS DE ENTREGA Y PAGO
+         =================================================================== -->
+    <section id="checkout-section" class="section-block">
+      <div class="container">
+        <div style="margin-bottom: 36px;">
+          <span class="section-kicker">✦ Finalizar compra</span>
+          <h2 class="section-title">Datos de entrega y pago</h2>
+          <p class="section-subtitle">
+            Completa tus datos para coordinar el envío de tus cajitas y recibir notificaciones por WhatsApp cuando tu
+            pedido esté en camino.
+          </p>
+        </div>
+
+        <div class="checkout-layout">
+          <!-- Formulario de Entrega -->
+          <form id="checkout-form" class="panel-card" onsubmit="handleConfirmOrder(event)">
+            <div class="checkout-card-header">
+              <div class="checkout-title-group">
+                <div class="icon-square-soft">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <h3 class="serif-title" style="font-size: 1.35rem; color: var(--forest-900);">Datos de entrega</h3>
+              </div>
+
+              <div id="checkout-auth-status">
+                <button type="button" class="checkout-auth-pill" onclick="openAuthModal('login')">
+                  <span>Inicia sesión para guardar tu pedido</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="checkout-name" class="form-label">Nombre completo <span class="req-star">*</span></label>
+              <input type="text" id="checkout-name" class="field-input" required placeholder="Ej. Ana Sofía Mendoza" />
+            </div>
+
+            <div class="form-group">
+              <label for="checkout-address" class="form-label">Dirección de entrega <span
+                  class="req-star">*</span></label>
+              <input type="text" id="checkout-address" class="field-input" required
+                placeholder="Calle, número, urbanización y referencia" />
+            </div>
+
+            <div class="form-group">
+              <label for="checkout-whatsapp" class="form-label">WhatsApp <span class="req-star">*</span></label>
+              <div class="input-with-icon">
+                <span class="input-icon-left">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                  </svg>
+                </span>
+                <input type="tel" id="checkout-whatsapp" class="field-input" required
+                  placeholder="Ej. +51 987 654 321" />
+              </div>
+              <p class="field-hint">Te notificamos por WhatsApp cuando tu cajita navideña esté en ruta.</p>
+            </div>
+
+            <!-- Método de pago -->
+            <div style="border-top: 1px solid var(--cream-200); padding-top: 20px; margin-top: 20px;">
+              <h3 class="serif-title" style="font-size: 1.35rem; color: var(--forest-900);">Método de pago</h3>
+
+              <div class="payment-methods-grid">
+                <label id="pay-label-card" class="pay-option-card active">
+                  <input type="radio" name="paymentMethod" value="card" checked
+                    onchange="togglePaymentMethod('card')" />
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.92rem; color: var(--forest-900);">Tarjeta</div>
+                    <div style="font-size: 0.78rem; color: var(--forest-600);">Crédito o débito</div>
+                  </div>
+                </label>
+
+                <label id="pay-label-transfer" class="pay-option-card">
+                  <input type="radio" name="paymentMethod" value="transfer"
+                    onchange="togglePaymentMethod('transfer')" />
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.92rem; color: var(--forest-900);">Transferencia</div>
+                    <div style="font-size: 0.78rem; color: var(--forest-600);">Bancaria directa</div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Campos Tarjeta -->
+              <div id="payment-card-box" class="payment-subbox">
+                <label class="form-label" style="font-size: 0.8rem;">Número de tarjeta</label>
+                <input type="text" class="field-input" style="background: var(--white);" maxlength="19"
+                  placeholder="4532 •••• •••• 8890" />
+                <div class="card-2col">
+                  <div>
+                    <label class="form-label" style="font-size: 0.8rem;">Vencimiento</label>
+                    <input type="text" class="field-input" style="background: var(--white);" maxlength="5"
+                      placeholder="12/28" />
+                  </div>
+                  <div>
+                    <label class="form-label" style="font-size: 0.8rem;">CVV</label>
+                    <input type="password" class="field-input" style="background: var(--white);" maxlength="4"
+                      placeholder="•••" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Datos Transferencia -->
+              <div id="payment-transfer-box" class="transfer-subbox hidden">
+                <div class="transfer-header">
+                  <strong>Datos para transferencia bancaria:</strong>
+                  <button type="button" class="btn-copy-bank" onclick="copyBankAccount()">Copiar cuenta</button>
+                </div>
+                <p>Banco Navideño • Cuenta Corriente: <strong id="bank-account-number">191-2849502-0-44</strong></p>
+                <p>Titular: <strong>Cajitas Navideñas S.A.C.</strong></p>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-confirm-order">
+              <span>Confirmar pedido navideño</span>
+            </button>
+          </form>
+
+          <!-- Resumen del Carrito en Checkout -->
+          <aside class="panel-card sticky-preview-card">
+            <div class="checkout-card-header">
+              <h3 class="serif-title" style="font-size: 1.35rem; color: var(--forest-900);">Resumen de tu carrito</h3>
+              <button type="button" style="font-size: 0.82rem; font-weight: 700; color: var(--terracotta-600);"
+                onclick="toggleCartDrawer(true)">
+                Editar artículos
+              </button>
+            </div>
+
+            <div id="checkout-summary-list" class="checkout-summary-list"></div>
+
+            <div class="totals-box">
+              <div class="total-line">
+                <span>Subtotal</span>
+                <strong id="checkout-subtotal">$40</strong>
+              </div>
+              <div class="total-line">
+                <span>Envío festivo</span>
+                <strong id="checkout-shipping">$5</strong>
+              </div>
+              <div class="total-line grand">
+                <span>Total</span>
+                <span id="checkout-total" class="grand-amount">$45</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================
+       FOOTER CÁLIDO NAVIDEÑO
+       =================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div class="brand-icon-box"
+          style="background: linear-gradient(135deg, var(--terracotta-600), var(--terracotta-700)); border: 1px solid var(--gold-300);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-200)" stroke-width="2">
+            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+            <rect x="2" y="7" width="20" height="5"></rect>
+            <line x1="12" y1="22" x2="12" y2="7"></line>
+            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+          </svg>
+        </div>
+        <div>
+          <strong class="serif-title" style="font-size: 1.25rem; color: var(--white); display: block;">Cajitas
+            Navideñas</strong>
+          <span style="font-size: 0.8rem; color: rgba(254, 243, 199, 0.85);">Regalos hechos con amor • Entregas durante
+            toda la temporada</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#modelos">Modelos</a>
+        <a href="#personalizar">Personalizar</a>
+        <button type="button" onclick="toggleCartDrawer(true)">Mi Carrito</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================
+       6. DRAWER LATERAL DEL CARRITO
+       ===================================================================== -->
+  <div id="cart-overlay" class="drawer-overlay" onclick="toggleCartDrawer(false)"></div>
+
+  <aside id="cart-drawer" class="cart-drawer" aria-label="Tu carrito de compras">
+    <div class="drawer-header">
+      <div class="drawer-title-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta-600)" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <h2 class="drawer-title">Tu carrito navideño</h2>
+      </div>
+      <button type="button" class="btn-close-circle" aria-label="Cerrar carrito"
+        onclick="toggleCartDrawer(false)">✕</button>
+    </div>
+
+    <div id="drawer-items-list" class="drawer-body"></div>
+
+    <div class="drawer-footer">
+      <div class="totals-box" style="border-top: none; padding-top: 0; margin-bottom: 16px;">
+        <div class="total-line">
+          <span>Subtotal:</span>
+          <strong id="drawer-subtotal">$40</strong>
+        </div>
+        <div class="total-line">
+          <span>Envío festivo:</span>
+          <strong id="drawer-shipping">$5</strong>
+        </div>
+        <div class="total-line grand">
+          <span>Total:</span>
+          <span id="drawer-total" class="grand-amount">$45</span>
+        </div>
+      </div>
+
+      <button type="button" class="btn-primary" style="width: 100%;" onclick="proceedToCheckout()">
+        <span>Continuar al pago</span>
+        <span>→</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ===================================================================
+       7. MODAL DE AUTENTICACIÓN
+       =================================================================== -->
+  <div id="auth-modal" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="brand-icon-box" style="width: 38px; height: 38px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 12 20 22 4 22 4 12"></polyline>
+              <rect x="2" y="7" width="20" height="5"></rect>
+              <line x1="12" y1="22" x2="12" y2="7"></line>
+              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="serif-title" style="font-size: 1.25rem; color: var(--forest-900);">Tu Cuenta Navideña</h3>
+            <p style="font-size: 0.78rem; color: var(--forest-600);">Guarda tus pedidos y agiliza tus entregas</p>
+          </div>
+        </div>
+        <button type="button" class="btn-close-circle" onclick="closeAuthModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="auth-tabs-bar">
+          <button type="button" id="tab-login" class="auth-tab-btn active" onclick="switchAuthTab('login')">Iniciar
+            sesión</button>
+          <button type="button" id="tab-register" class="auth-tab-btn"
+            onclick="switchAuthTab('register')">Registrarse</button>
+        </div>
+
+        <div id="auth-error-banner" class="auth-alert-error hidden">
+          <span>⚠</span>
+          <span id="auth-error-msg">Error de validación</span>
+        </div>
+
+        <!-- Formulario Iniciar Sesión -->
+        <form id="login-form" onsubmit="handleLoginSubmit(event)">
+          <div class="form-group">
+            <label for="login-email" class="form-label">Correo electrónico</label>
+            <input type="email" id="login-email" class="field-input" required placeholder="correo@ejemplo.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="login-password" class="form-label">Contraseña</label>
+            <div class="password-wrap">
+              <input type="password" id="login-password" class="field-input" required
+                placeholder="Mínimo 6 caracteres" />
+              <button type="button" class="btn-toggle-pass" onclick="togglePassField('login-password')">👁</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-add-to-cart" style="margin-top: 8px;">
+            <span>Entrar a mi cuenta</span>
+          </button>
+        </form>
+
+        <!-- Formulario Registrarse -->
+        <form id="register-form" class="hidden" onsubmit="handleRegisterSubmit(event)">
+          <div class="form-group">
+            <label for="reg-name" class="form-label">Nombre completo</label>
+            <input type="text" id="reg-name" class="field-input" required placeholder="Ej. Carlos Ramírez" />
+          </div>
+
+          <div class="form-group">
+            <label for="reg-email" class="form-label">Correo electrónico</label>
+            <input type="email" id="reg-email" class="field-input" required placeholder="carlos@ejemplo.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="reg-whatsapp" class="form-label">WhatsApp</label>
+            <input type="tel" id="reg-whatsapp" class="field-input" required placeholder="+51 987 654 321" />
+          </div>
+
+          <div class="form-group">
+            <label for="reg-password" class="form-label">Contraseña (mín. 6 caracteres)</label>
+            <div class="password-wrap">
+              <input type="password" id="reg-password" class="field-input" required minlength="6"
+                placeholder="Crea una contraseña segura" />
+              <button type="button" class="btn-toggle-pass" onclick="togglePassField('reg-password')">👁</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%;">
+            <span>Crear cuenta y entrar</span>
+          </button>
+        </form>
+
+        <div class="demo-divider-area">
+          <button type="button" class="btn-demo-login" onclick="loginWithDemo()">
+            <span>✨ Acceso rápido demo (1 clic)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       8. MODAL DE PERFIL Y MIS PEDIDOS
+       =================================================================== -->
+  <div id="account-modal" class="modal-backdrop hidden">
+    <div class="modal-box wide">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div id="acct-avatar" class="user-avatar-circle" style="width: 44px; height: 44px; font-size: 0.9rem;">AM
+          </div>
+          <div>
+            <h3 id="acct-name" class="serif-title" style="font-size: 1.25rem; color: var(--forest-900);">Ana Sofía
+              Mendoza</h3>
+            <p id="acct-email" style="font-size: 0.8rem; color: var(--forest-600);">ana.demo@cajitasnavidenas.com</p>
+          </div>
+        </div>
+        <button type="button" class="btn-close-circle" onclick="closeAccountModal()">✕</button>
+      </div>
+
+      <div class="account-subnav">
+        <button type="button" id="acct-tab-orders" class="acct-nav-btn active" onclick="switchAccountTab('orders')">
+          <span>📦 Mis pedidos</span>
+        </button>
+        <button type="button" id="acct-tab-profile" class="acct-nav-btn" onclick="switchAccountTab('profile')">
+          <span>👤 Mi perfil</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Vista Historial de Pedidos -->
+        <div id="acct-orders-view"></div>
+
+        <!-- Vista Editar Perfil -->
+        <form id="acct-profile-view" class="hidden" onsubmit="handleSaveProfile(event)">
+          <div class="form-group">
+            <label for="prof-name" class="form-label">Nombre completo</label>
+            <input type="text" id="prof-name" class="field-input" required />
+          </div>
+
+          <div class="card-2col" style="margin-bottom: 18px;">
+            <div>
+              <label for="prof-email" class="form-label">Correo electrónico</label>
+              <input type="email" id="prof-email" class="field-input" disabled
+                style="background: var(--cream-100); cursor: not-allowed;" />
+            </div>
+            <div>
+              <label for="prof-whatsapp" class="form-label">WhatsApp</label>
+              <input type="tel" id="prof-whatsapp" class="field-input" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="prof-address" class="form-label">Dirección de entrega predeterminada</label>
+            <input type="text" id="prof-address" class="field-input" placeholder="Ej. Av. Los Pinos 450, Dpto 302" />
+          </div>
+
+          <button type="submit" class="btn-add-to-cart">
+            <span>Guardar datos de perfil</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       9. MODAL DE CONFIRMACIÓN DE PEDIDO
+       =================================================================== -->
+  <div id="confirmation-modal" class="modal-backdrop hidden">
+    <div class="modal-box confirm-box">
+      <div class="confirm-icon-circle">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <span
+        style="display: inline-block; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--gold-100); color: var(--gold-600); border: 1px solid var(--gold-200); padding: 4px 12px; border-radius: var(--radius-full); margin-bottom: 10px;">
+        Pedido #<span id="confirm-order-id">NAV-2026</span>
+      </span>
+
+      <h3 class="serif-title" style="font-size: 1.95rem; color: var(--forest-900); margin-bottom: 6px;">
+        ¡Gracias por tu pedido navideño!
+      </h3>
+      <p style="font-size: 1rem; font-weight: 600; color: var(--forest-700);">
+        Te notificaremos por WhatsApp cuando tu detalle esté listo.
+      </p>
+
+      <div class="confirm-details-box">
+        <div class="confirm-row">
+          <span style="color: var(--forest-600);">Cliente:</span>
+          <strong id="confirm-name">-</strong>
+        </div>
+        <div class="confirm-row">
+          <span style="color: var(--forest-600);">WhatsApp:</span>
+          <strong id="confirm-whatsapp">-</strong>
+        </div>
+        <div class="confirm-row">
+          <span style="color: var(--forest-600);">Dirección:</span>
+          <strong id="confirm-address" style="text-align: right;">-</strong>
+        </div>
+        <div class="confirm-row" style="border-top: 1px solid var(--cream-200); padding-top: 8px; margin-top: 4px;">
+          <span style="color: var(--forest-600);">Total pagado:</span>
+          <strong id="confirm-total" style="color: var(--terracotta-600); font-size: 1.15rem;">$0</strong>
+        </div>
+      </div>
+
+      <div id="confirm-history-notice" class="hidden"
+        style="background: var(--forest-50); border: 1px solid var(--forest-200); border-radius: 12px; padding: 10px 14px; font-size: 0.8rem; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
+        <span>✓ Guardado en tu historial de <strong>Mis pedidos</strong>.</span>
+        <button type="button" style="color: var(--terracotta-600); font-weight: 700;"
+          onclick="closeConfirmationModal(); openAccountModal('orders');">
+          Ver pedido
+        </button>
+      </div>
+
+      <button type="button" class="btn-add-to-cart" onclick="closeConfirmationModal()">
+        <span>Volver a la tienda</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notificación -->
+  <div id="toast-banner" class="toast-banner" role="status" aria-live="polite">
+    <div class="toast-icon">✨</div>
+    <div>
+      <div id="toast-title" style="font-size: 0.9rem; font-weight: 700;">¡Listo!</div>
+      <div id="toast-desc" style="font-size: 0.78rem; color: rgba(255, 253, 249, 0.88);">Acción completada.</div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       10. JAVASCRIPT VANILLA PURO
+       =================================================================== -->
+
+  <!-- Lógica e interactividad JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
